@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\helpers\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 /**
  * App\Models\Product
@@ -35,4 +37,17 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'price', 'new_price', 'in_stock', 'description'];
+
+    public function getStatus()
+    {
+        return Arr::get(self::getStatusList(), $this->in_stock);
+    }
+
+    public static function getStatusList()
+    {
+        return [
+            Status::OUT_OF_STOCK => __('Out of stock'),
+            Status::IN_STOCK => __('In stock'),
+        ];
+    }
 }

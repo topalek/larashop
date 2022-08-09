@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\helpers\Status;
-use App\Models\Product;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(): View
+
+    public function index()
     {
-        $products = Product::where(['in_stock' => Status::IN_STOCK])->paginate(9);
-        $pr = Product::find(25);
-        dd($pr);
-        return view('home.index');
+        return view('home');
     }
 }

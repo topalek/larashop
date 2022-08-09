@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/admin', [AdminController::class, 'index']);
+//Route::middleware(['role:admin'])->prefix('settings')->group(function () {
+//});
 Route::get('/', [HomeController::class, 'index']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
